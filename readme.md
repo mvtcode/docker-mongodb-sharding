@@ -66,6 +66,12 @@
 
 `sh.addShard("setSha3/mongosharding31:27017,10.0.0.32:27017")`
 
+### Config enableSharding for db
+
+`sh.enableSharding("daytothoctot")`
+
+`sh.shardCollection("daytothoctot.users", {username: 1}, true)`
+
 ## Author
 
 [tanmv](https://mvtcode.github.io/)
