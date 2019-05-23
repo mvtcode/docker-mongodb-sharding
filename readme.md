@@ -1,6 +1,12 @@
 # Mongodb Sharding 4.0.9
 
-## Config replication mongo config
+## Start docker container
+
+`docker-compose up`
+
+## Config server
+
+### Config replication mongo config
 
 `docker exec -it mongoconfig1 mongo`
 
@@ -14,7 +20,7 @@
 
 `exit`
 
-## Config sharding cluster 1
+### Config sharding cluster 1
 
 `docker exec -it mongosharding11 mongo`
 
@@ -26,7 +32,7 @@
 
 `exit`
 
-## Config sharding cluster 2
+### Config sharding cluster 2
 
 `docker exec -it mongosharding21 mongo`
 
@@ -38,7 +44,7 @@
 
 `exit`
 
-## Config sharding cluster 3
+### Config sharding cluster 3
 
 `docker exec -it mongosharding31 mongo`
 
@@ -50,7 +56,7 @@
 
 `exit`
 
-## Config sharding
+### Config sharding
 
 `docker exec -it mongos mongo # IP: 10.0.0.100`
 
@@ -62,4 +68,7 @@
 
 ## Author
 
-tanmv
+[tanmv](https://mvtcode.github.io/)
+
+Email: macvantan@gmail.com
+Facebook: [Trai Hải Phòng](https://facebook.com/mvt.hp.star)
