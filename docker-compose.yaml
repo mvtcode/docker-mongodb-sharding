@@ -7,8 +7,33 @@
 version: "3"
 
 services:
+  mongos:
+    image: tanmv/docker-mongos:1.0.2
+    container_name: mongos
+    hostname: mongos
+    depends_on:
+      - mongoconfig1
+      - mongoconfig2
+      - mongoconfig3
+    ports:
+      - "127.0.0.1:27017:27017"
+    tty: true
+    volumes:
+      - "./mongos/log:/var/log/mongodb"
+      - "./mongos/mongos.conf:/etc/mongos.conf"
+    networks:
+      local:
+        ipv4_address: 10.0.0.100
+
   mongoconfig1:
     image: tanmv/docker-mongodb
+    depends_on:
+      - mongosharding11
+      - mongosharding12
+      - mongosharding21
+      - mongosharding22
+      - mongosharding31
+      - mongosharding32
     container_name: mongoconfig1
     hostname: mongoconfig1
     tty: true
@@ -22,6 +47,13 @@ services:
 
   mongoconfig2:
     image: tanmv/docker-mongodb
+    depends_on:
+      - mongosharding11
+      - mongosharding12
+      - mongosharding21
+      - mongosharding22
+      - mongosharding31
+      - mongosharding32
     container_name: mongoconfig2
     hostname: mongoconfig2
     tty: true
@@ -35,6 +67,13 @@ services:
 
   mongoconfig3:
     image: tanmv/docker-mongodb
+    depends_on:
+      - mongosharding11
+      - mongosharding12
+      - mongosharding21
+      - mongosharding22
+      - mongosharding31
+      - mongosharding32
     container_name: mongoconfig3
     hostname: mongoconfig3
     tty: true
@@ -123,20 +162,6 @@ services:
     networks:
       local:
         ipv4_address: 10.0.0.32
-
-  mongos:
-    image: tanmv/docker-mongos:1.0.2
-    container_name: mongos
-    hostname: mongos
-    ports:
-      - "127.0.0.1:27017:27017"
-    tty: true
-    volumes:
-      - "./mongos/log:/var/log/mongodb"
-      - "./mongos/mongos.conf:/etc/mongos.conf"
-    networks:
-      local:
-        ipv4_address: 10.0.0.100
 
 networks:
   local:
