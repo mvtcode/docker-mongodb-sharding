@@ -1,0 +1,147 @@
+# Mongodb Sharding 4.0.9
+# Auth: tanmv
+# Email: macvantan@gmail.com
+# FB: fb/mvt.hp.star
+# Date: 2019-05-23
+
+version: "3"
+
+services:
+  mongoconfig1:
+    image: tanmv/docker-mongodb
+    container_name: mongoconfig1
+    hostname: mongoconfig1
+    tty: true
+    volumes:
+      - "./mongoconfig1/log:/var/log/mongodb"
+      - "./mongoconfig1/data:/var/lib/mongodb"
+      - "./mongoconfig1/mongod.conf:/etc/mongod.conf"
+    networks:
+      local:
+        ipv4_address: 10.0.0.101
+
+  mongoconfig2:
+    image: tanmv/docker-mongodb
+    container_name: mongoconfig2
+    hostname: mongoconfig2
+    tty: true
+    volumes:
+      - "./mongoconfig2/log:/var/log/mongodb"
+      - "./mongoconfig2/data:/var/lib/mongodb"
+      - "./mongoconfig2/mongod.conf:/etc/mongod.conf"
+    networks:
+      local:
+        ipv4_address: 10.0.0.102
+
+  mongoconfig3:
+    image: tanmv/docker-mongodb
+    container_name: mongoconfig3
+    hostname: mongoconfig3
+    tty: true
+    volumes:
+      - "./mongoconfig3/log:/var/log/mongodb"
+      - "./mongoconfig3/data:/var/lib/mongodb"
+      - "./mongoconfig3/mongod.conf:/etc/mongod.conf"
+    networks:
+      local:
+        ipv4_address: 10.0.0.103
+
+  mongosharding11:
+    image: tanmv/docker-mongodb
+    container_name: mongosharding11
+    hostname: mongosharding11
+    tty: true
+    volumes:
+      - "./mongosharding11/log:/var/log/mongodb"
+      - "./mongosharding11/data:/var/lib/mongodb"
+      - "./mongosharding11/mongod.conf:/etc/mongod.conf"
+    networks:
+      local:
+        ipv4_address: 10.0.0.11
+
+  mongosharding12:
+    image: tanmv/docker-mongodb
+    container_name: mongosharding12
+    hostname: mongosharding12
+    tty: true
+    volumes:
+      - "./mongosharding12/log:/var/log/mongodb"
+      - "./mongosharding12/data:/var/lib/mongodb"
+      - "./mongosharding12/mongod.conf:/etc/mongod.conf"
+    networks:
+      local:
+        ipv4_address: 10.0.0.12
+
+  mongosharding21:
+    image: tanmv/docker-mongodb
+    container_name: mongosharding21
+    hostname: mongosharding21
+    tty: true
+    volumes:
+      - "./mongosharding21/log:/var/log/mongodb"
+      - "./mongosharding21/data:/var/lib/mongodb"
+      - "./mongosharding21/mongod.conf:/etc/mongod.conf"
+    networks:
+      local:
+        ipv4_address: 10.0.0.21
+
+  mongosharding22:
+    image: tanmv/docker-mongodb
+    container_name: mongosharding22
+    hostname: mongosharding22
+    tty: true
+    volumes:
+      - "./mongosharding22/log:/var/log/mongodb"
+      - "./mongosharding22/data:/var/lib/mongodb"
+      - "./mongosharding22/mongod.conf:/etc/mongod.conf"
+    networks:
+      local:
+        ipv4_address: 10.0.0.22
+
+  mongosharding31:
+    image: tanmv/docker-mongodb
+    container_name: mongosharding31
+    hostname: mongosharding31
+    tty: true
+    volumes:
+      - "./mongosharding31/log:/var/log/mongodb"
+      - "./mongosharding31/data:/var/lib/mongodb"
+      - "./mongosharding31/mongod.conf:/etc/mongod.conf"
+    networks:
+      local:
+        ipv4_address: 10.0.0.31
+
+  mongosharding32:
+    image: tanmv/docker-mongodb
+    container_name: mongosharding32
+    hostname: mongosharding32
+    tty: true
+    volumes:
+      - "./mongosharding32/log:/var/log/mongodb"
+      - "./mongosharding32/data:/var/lib/mongodb"
+      - "./mongosharding32/mongod.conf:/etc/mongod.conf"
+    networks:
+      local:
+        ipv4_address: 10.0.0.32
+
+  mongos:
+    image: tanmv/docker-mongos:1.0.2
+    container_name: mongos
+    hostname: mongos
+    ports:
+      - "127.0.0.1:27017:27017"
+    tty: true
+    volumes:
+      - "./mongos/log:/var/log/mongodb"
+      - "./mongos/mongos.conf:/etc/mongos.conf"
+    networks:
+      local:
+        ipv4_address: 10.0.0.100
+
+networks:
+  local:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.0.0/8
